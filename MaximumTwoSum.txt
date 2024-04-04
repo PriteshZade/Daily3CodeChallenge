@@ -1,0 +1,28 @@
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int i = 0 ; int j = nums.length-1;
+        int sum =0;
+        int[][] c = new int[4][2];
+        for(int x = 0 ; x < nums.length ; x++){
+            c[x][0]= x;
+            c[x][1]=nums[x];
+        }
+        Arrays.sort(c,Comparator.comparingDouble(o->o[1]));
+        int a[]= new int[2];
+        while(i<j){
+            sum=c[i][1]+c[j][1];
+            if(sum==target){
+                a[0]= c[i][0];
+                a[1]= c[j][0];
+                return a;
+            }
+            else if(sum<target){
+                i++;
+            }
+            else{
+                j--;
+            }
+        }
+        return a;
+    }
+}
