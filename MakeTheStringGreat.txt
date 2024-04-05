@@ -1,0 +1,28 @@
+import java.util.Stack;
+
+class Solution {
+    public String makeGood(String s) {
+        Stack<Character> stack = new Stack<>();
+        stack.push(s.charAt(0));
+        for(int i = 1 ; i < s.length(); i++){
+            Character prev;
+            if(stack.isEmpty()){
+                prev= '0';
+            }
+            else{
+                 prev = stack.peek();
+            }
+            
+            stack.push(s.charAt(i));
+            if((Character.isUpperCase(s.charAt(i)) && prev == Character.toLowerCase(s.charAt(i))) || (Character.isUpperCase(prev) && s.charAt(i) == Character.toLowerCase(prev))){
+                stack.pop();
+                stack.pop();
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        while(!stack.isEmpty()){
+            sb = sb.append(stack.pop());
+        }
+        return sb.reverse().toString();
+    }
+}
